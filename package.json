@@ -1,0 +1,17 @@
+{
+  "name": "capstone-project3",
+  "version": "1.0.0",
+  "description": "BlogAppli",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chigozie Uhiara",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "method-override": "^3.0.0"
+  }
+}
