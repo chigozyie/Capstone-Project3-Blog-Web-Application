@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capstone Project III</title>
-</head>
-<body>
-    <% if(blogs && blogs.length) { %>
+<%- include("partials/header.ejs") %>
+
+    <!-- <% if(blogs && blogs.length) { %>
         <h1>Blogs</h1>
         <ul>
             <% blogs.forEach(blog => { %>
@@ -22,7 +16,70 @@
         <input type="text" name="title" placeholder="Blog title">
         <textarea name="content" placeholder="Blog content"></textarea>
         <input type="submit" value="Create New Blog">
-    </form>
-    
-</body>
-</html>
+    </form> -->
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h1 class="display-4">Welcome to My Blog</h1>
+                <p class="lead">Share your thoughts and ideas with the world</p>
+            </div>
+        </div>
+
+        <!-- Blogs List -->
+        <% if(blogs && blogs.length) { %>
+            <div class="row">
+                <% blogs.forEach(blog => { %>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card blog-card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= blog.title %></h5>
+                                <p class="card-text text-muted"><small>Posted on: <%= blog.date %></small></p>
+                                <p class="card-text"><%= blog.content.substring(0, 100) %>...</p>
+                                <a href="/blog/<%= blog.id %>" class="btn btn-primary btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="alert alert-info" role="alert">
+                        <h4 class="alert-heading">No blogs yet!</h4>
+                        <p>Be the first to create a blog post.</p>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Create Blog Modal -->
+    <div class="modal fade" id="createBlogModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/create-new-blog" method="POST">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create Blog</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<%- include("partials/footer.ejs") %>

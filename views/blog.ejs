@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= blog.title %></title>
-</head>
-<body>
-    <h1><%= blog.title %></h1>
+<%- include("partials/header.ejs") %>
+
+    <!-- <h1><%= blog.title %></h1>
     <p style="text-align: right;"><%= blog.date %></p>
     <p><%= blog.content %></p>
     <a href="/">Go Back</a>
@@ -15,7 +9,36 @@
 
     <form action="/blog/<%= blog.id %>/delete" method="POST" style="display: inline;">
         <button type="submit" onclick="return confirm('Are you sure you want to delete this blog?');">Delete Blog</button>
-    </form>
+    </form> -->
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <!-- Back Button -->
+                <a href="/" class="btn btn-outline-secondary mb-4">
+                    &larr; Back to Blogs
+                </a>
+                
+                <!-- Blog Content -->
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title"><%= blog.title %></h1>
+                        <p class="text-muted"><small>Posted on: <%= blog.date %></small></p>
+                        <hr>
+                        <p class="card-text"><%= blog.content %></p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a href="/edit-blog/<%= blog.id %>" class="btn btn-outline-primary">Edit Blog</a>
+                        <form action="/blog/<%= blog.id %>/delete" method="POST">
+                            <button type="submit" class="btn btn-outline-danger"
+                                onclick="return confirm('Are you sure you want to delete this blog?');">Delete Blog
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
-</body>
-</html>
+
+<%- include("partials/footer.ejs") %>
